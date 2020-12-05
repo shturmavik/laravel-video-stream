@@ -34,4 +34,14 @@ QUEUE_CONNECTION=database
 php artisan queue:table
 php artisan migrate
 
-Videos put in /storage/app/public/uploads/NAME-SECTIONS/video.mp4
+Videos should put in /storage/app/public/uploads/NAME-SECTIONS/video.mp4
+
+Params default:
+```
+$video->HLS()
+    ->encryption($save_to, $url)
+    ->X264()
+    ->autoGenerateRepresentations([1080, 720, 480, 360]) // You can limit the number of representatons
+    ->setHlsTime(2)
+    ->save();
+```
