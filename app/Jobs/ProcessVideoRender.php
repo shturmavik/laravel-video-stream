@@ -15,8 +15,10 @@ use Streaming\FFMpeg;
 class ProcessVideoRender implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     protected static $document_root = '/usr/share/nginx/html';
     private $section;
+    public $timeout = 0;
 
     /**
      * Create a new job instance.
@@ -36,14 +38,14 @@ class ProcessVideoRender implements ShouldQueue
     public function handle()
     {
         $config = [
-            'ffmpeg.binaries' => '/usr/bin/ffmpeg',
+            'ffmpeg.binaries'  => '/home/admin/bin/ffmpeg',
+//            'ffmpeg.binaries' => '/usr/bin/ffmpeg',
             'ffprobe.binaries' => '/usr/bin/ffprobe',
-//            'ffmpeg.binaries' => '/home/admin/bin/ffmpeg',
 //            'ffprobe.binaries' => '/home/admin/bin/ffprobe',
 //            'ffmpeg.binaries'  => '/usr/local/bin/ffmpeg',
 //            'ffprobe.binaries' => '/usr/local/bin/ffprobe',
-            'timeout' => 3600, // The timeout for the underlying process
-            'ffmpeg.threads' => 12,   // The number of threads that FFmpeg should use
+            'timeout'          => 86400, // The timeout for the underlying process
+            'ffmpeg.threads'   => 12,   // The number of threads that FFmpeg should use
         ];
 
         $log = new Logger('FFmpeg_Streaming');
