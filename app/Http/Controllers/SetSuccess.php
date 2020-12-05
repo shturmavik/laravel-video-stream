@@ -9,6 +9,7 @@ class SetSuccess extends Controller
 {
     public function store(Request $request)
     {
+        $movies = \App\Movie::where('name', '=', $this->matchVideo($request->video))->firstOrFail();
         $visitor = \App\Visitor::firstOrCreate(
             [
                 'name'       => "''",
@@ -16,7 +17,6 @@ class SetSuccess extends Controller
                 'email_hash' => md5($request->email),
             ]
         );
-        $movies = \App\Movie::where('name', '=', $this->matchVideo($request->video))->firstOrFail();
         $visitor->movies()->attach($movies);
         return true;
     }

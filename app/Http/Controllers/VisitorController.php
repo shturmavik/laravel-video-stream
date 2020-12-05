@@ -8,14 +8,14 @@ class VisitorController extends Controller
 {
     public function store(Request $request)
     {
-        $visitor = \App\Visitor::firstOrCreate(
+        $getMovieByCode = \App\Movie::where('name', '=', $request['movie'])->firstOrFail();
+        $processVisitor = \App\Visitor::firstOrCreate(
             [
-                'name' => "''",
-                'email' => $request['email'],
+                'name'       => "''",
+                'email'      => $request['email'],
                 'email_hash' => md5($request['email']),
             ]
         );
-        $movies = \App\Movie::where('name', '=', $request['movie'])->firstOrFail();;
-        $visitor->movies()->attach($movies);
+        $processVisitor->movies()->attach($getMovieByCode);
     }
 }

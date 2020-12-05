@@ -6,6 +6,9 @@
 - Each video.mp4 has file *.m3u and many *.ts files for flood.
 - Each video render in queue laravel JOB
 
+Short manual:
+- VisitorController@store -> add visitor (who will watch video)
+
 Put PIN=7264 in your .env file.
 
 Videos put in /storage/app/public/uploads/NAME-SECTIONS/video.mp4
