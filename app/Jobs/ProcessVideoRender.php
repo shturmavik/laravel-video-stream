@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -11,11 +12,12 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Streaming\FFMpeg;
 
-class VideoCreatJob implements ShouldQueue
+class ProcessVideoRender implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected static $document_root = '/usr/share/nginx/html';
     private $section;
+
     /**
      * Create a new job instance.
      *
@@ -56,7 +58,7 @@ class VideoCreatJob implements ShouldQueue
         $url = url('/') . '/key_dir/' . $this->section . '/random_key.key';
 
         $video->HLS()
-//            ->encryption($save_to, $url)
+            ->encryption($save_to, $url)
             ->X264()
             ->autoGenerateRepresentations([1080, 720, 480, 360]) // You can limit the number of representatons
             ->setHlsTime(2)

@@ -25,14 +25,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use App\Jobs\VideoCreatJob;
+use App\Jobs\ProcessVideoRender;
 use Illuminate\Http\Request;
 
 class StreamFFmpeg extends Controller
 {
     public function create($section)
     {
-        VideoCreatJob::dispatch($section);
+        dispatch(new \App\Jobs\ProcessVideoRender($section));
+//        ProcessVideoRender::dispatch($section);
     }
 
     public function show($section, Request $request)
