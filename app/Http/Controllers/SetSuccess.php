@@ -7,20 +7,6 @@ use \Illuminate\Support\Facades\URL;
 
 class SetSuccess extends Controller
 {
-    public function store(Request $request)
-    {
-        $movies = \App\Movie::where('name', '=', $this->matchVideo($request->video))->firstOrFail();
-        $visitor = \App\Visitor::firstOrCreate(
-            [
-                'name'       => "''",
-                'email'      => $request->email,
-                'email_hash' => md5($request->email),
-            ]
-        );
-        $visitor->movies()->attach($movies);
-        return true;
-    }
-
     public function show($email_hash, $video_name)
     {
         $video_name = $this->matchVideo($video_name);
