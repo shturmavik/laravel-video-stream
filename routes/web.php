@@ -33,7 +33,7 @@ Route::view(
 
 Route::post('pin/store', PinController::class)->name('pin.store')->middleware('throttle:3,1');
 
-//access by URL
+//access by URL with sign
 Route::get('/{section}', [StreamFFmpeg::class, 'show'])
     ->name('watchStream')->middleware([CheckAccess::class, 'signed']);
 

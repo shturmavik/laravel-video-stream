@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\IpUtils;
 class IpMiddleware
 {
     protected $ipRanges = [
-        '3.127.20.63',
+        'IP_ADDRESS',
     ];
 
     /**
