@@ -2,6 +2,7 @@
 
 ## About this project
 
+- Render video on queue
 - Access to video by email hash or token number.
 - Each video.mp4 has file *.m3u and many *.ts files for flood.
 - Each video render in queue laravel JOB
@@ -28,5 +29,9 @@ curl --location --request DELETE 'https://your-web-site.ru/api/?email=email-of-v
 ```
 
 Put PIN=7264 in your .env file.
+QUEUE_CONNECTION=database
+
+php artisan queue:table
+php artisan migrate
 
 Videos put in /storage/app/public/uploads/NAME-SECTIONS/video.mp4
