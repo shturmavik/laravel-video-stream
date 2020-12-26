@@ -14,10 +14,10 @@ class CheckAccess
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $getSuccess = new SetSuccess();
-        $getSuccess->show($request->email_hash, $request->section);
+        $getSuccess->show($request['email_hash'], $request['section']);
         return $next($request);
     }
 }

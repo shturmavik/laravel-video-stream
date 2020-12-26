@@ -23,22 +23,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use App\Jobs\ProcessVideoRender;
 use Illuminate\Http\Request;
 
 class StreamFFmpeg extends Controller
 {
-    public function create($section)
+    public function store($section)
     {
         dispatch(new \App\Jobs\ProcessVideoRender($section));
-//        ProcessVideoRender::dispatch($section);
     }
 
-    public function show($section, Request $request)
+    public function show($section)
     {
         $url = Storage::url('uploads/' . $section . '/video.m3u8');
-        return view('welcome')
-            ->with('utl_stream', $url);
+        return view('welcome')->with('utl_stream', $url);
     }
 }
 

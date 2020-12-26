@@ -51,7 +51,7 @@ class ProcessVideoRender implements ShouldQueue
         $log = new Logger('FFmpeg_Streaming');
         $log->pushHandler(
             new StreamHandler(self::$document_root . '/storage/logs/ffmpeg-streaming.log')
-        ); // path to log file
+        );
 
         $ffmpeg = FFMpeg::create($config, $log);
         $video = $ffmpeg->open(self::$document_root . '/storage/app/public/uploads/' . $this->section . '/video.mp4');

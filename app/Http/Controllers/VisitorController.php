@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class VisitorController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): string
     {
         $getMovieByCode = \App\Movie::where('name', '=', $request['movie'])->firstOrFail();
         $processVisitor = \App\Visitor::firstOrCreate(
@@ -17,5 +17,6 @@ class VisitorController extends Controller
             ]
         );
         $processVisitor->movies()->attach($getMovieByCode);
+        return response(null, 201);
     }
 }
